@@ -6,6 +6,7 @@ import Home from "../pages/Home";
 import Project from "../pages/Project";
 import Grid from "./Grid";
 import TextBody from "./TextBody";
+import GridScheme from "../components/GridScheme";
 
 const Body = (props) => {
   const { data } = props;
@@ -19,7 +20,12 @@ const Body = (props) => {
               <h4 style={{ margin: "50px, 0px, 30px, 0px" }}>{hlink.header}</h4>
             )}
 
-            {hlink.grid && <Grid page="hlink" hlink={hlink} {...props} />}
+            {hlink.grid && (
+              <div style={{ position: "relative" }}>
+                <GridScheme page="hlink" hlink={hlink} {...props} />
+                <Grid page="hlink" hlink={hlink} {...props} />
+              </div>
+            )}
             {(hlink.title || hlink.subtitle || hlink.text) && (
               <TextBody
                 title={hlink.title || ""}

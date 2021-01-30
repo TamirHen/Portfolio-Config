@@ -1,7 +1,6 @@
 /* eslint-disable eqeqeq */
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import uuid from "react-uuid";
 
 const Grid = (props) => {
   const { data, page, hlink } = props;
@@ -38,13 +37,32 @@ const Grid = (props) => {
   };
 
   const setTable = () => {
-    return new Array(gridRows)
-      .fill()
-      .map(() =>
-        new Array(gridColumns).fill(
-          <div style={{ border: "2px dashed black" }}></div>
-        )
-      );
+    let table = new Array(gridRows);
+    for (let i = 1; i <= gridRows; i++) {
+      table[i] = new Array(gridColumns);
+      for (let j = 1; j <= gridColumns; j++) {
+        table[i][j] = (
+          <div
+            id={"div-" + i + "-" + j}
+            key={i + j}
+            style={{ border: "1px dashed black" }}
+          >
+            <p
+              style={{
+                position: "relative",
+                left: "2px",
+                top: "0px",
+                fontSize: isMobile ? "8px" : isTablet ? "12px" : "14px",
+                margin: "0px",
+              }}
+            >
+              {`(${i},${j})`}
+            </p>
+          </div>
+        );
+      }
+    }
+    return table;
   };
 
   return <div style={style.gallery}>{setTable()}</div>;

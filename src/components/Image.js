@@ -8,7 +8,6 @@ const Image = (props) => {
     id,
     image,
     name,
-    genre,
     rowStart,
     rowEnd,
     columnStart,
@@ -25,14 +24,10 @@ const Image = (props) => {
       }}
     >
       {page === "project" ? (
-        <img className={"image"} src={image} alt={name} />
+        <img className={"image fade"} src={image} alt={name} />
       ) : (
         <Link to={`/project/${id}`}>
           <img className={"image fade"} src={image} alt={name} />
-          <div className="figure-text">
-            <p style={{ fontWeight: "bold" }}>{name}</p>
-            <p style={{ fontSize: "14px", marginTop: "3px" }}>{genre}</p>
-          </div>
         </Link>
       )}
     </figure>
