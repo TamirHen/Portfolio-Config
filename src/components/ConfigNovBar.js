@@ -33,8 +33,6 @@ const ConfigNavBar = () => {
               {/* Configuration */}
               <Nav.Item
                 panel
-                eventKey={counter++}
-                icon={<Icon icon="dashboard" />}
                 style={{
                   padding: "15px 20px",
                   color: "#1675e0",
@@ -49,21 +47,24 @@ const ConfigNavBar = () => {
                 Header
               </Nav.Item>
 
-              {/* Title */}
-              <Nav.Item eventKey={counter++} icon={<Icon icon="dashboard" />}>
-                Title
-              </Nav.Item>
+              {/* Header text */}
+              <Dropdown
+                eventKey={counter++}
+                title="Text"
+                icon={<Icon icon="pencil" />}
+              >
+                {/* Title */}
+                <Dropdown.Item eventKey={counter++}>Title</Dropdown.Item>
 
-              {/* Subtitle */}
-              <Nav.Item eventKey={counter++} icon={<Icon icon="group" />}>
-                Subtitle
-              </Nav.Item>
+                {/* Subtitle */}
+                <Dropdown.Item eventKey={counter++}>Subtitle</Dropdown.Item>
+              </Dropdown>
 
               {/* Header Links */}
               <Dropdown
                 eventKey={counter++}
                 title="Header Links"
-                icon={<Icon icon="magic" />}
+                icon={<Icon icon="link" />}
               >
                 {data.headerLinks.map((headerLink) => (
                   <Dropdown.Item
@@ -84,7 +85,7 @@ const ConfigNavBar = () => {
               <Dropdown
                 eventKey={counter++}
                 title="Cubes"
-                icon={<Icon icon="magic" />}
+                icon={<Icon icon="cubes" />}
               >
                 {data.cubes.map((cube) => (
                   <Dropdown.Item
@@ -100,7 +101,7 @@ const ConfigNavBar = () => {
               <Dropdown
                 eventKey={counter++}
                 title="Pages"
-                icon={<Icon icon="magic" />}
+                icon={<Icon icon="web" />}
               >
                 <Dropdown.Item>Home</Dropdown.Item>
                 <Dropdown.Item>Project</Dropdown.Item>
@@ -121,14 +122,26 @@ const ConfigNavBar = () => {
               </Nav.Item>
 
               {/* Footer text */}
-              <Nav.Item eventKey={counter++} icon={<Icon icon="dashboard" />}>
-                Footer Text
+              <Nav.Item eventKey={counter++} icon={<Icon icon="pencil" />}>
+                Text
               </Nav.Item>
 
               <Nav.Item divider style={dividerStyles} />
               <Nav.Item panel style={panelStyles}>
                 Settings
               </Nav.Item>
+
+              <Dropdown
+                eventKey={counter++}
+                title="Break Points"
+                icon={<Icon icon="pc" />}
+              >
+                {Object.keys(data.breakPoints).map((keyName) => (
+                  <Dropdown.Item key={uuid()}>
+                    {keyName.charAt(0).toUpperCase() + keyName.slice(1)}
+                  </Dropdown.Item>
+                ))}
+              </Dropdown>
             </Nav>
           </Sidenav.Body>
         </Sidenav>
