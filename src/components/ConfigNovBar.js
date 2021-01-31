@@ -6,6 +6,17 @@ import { DataContext } from "../providers/DataProvider";
 
 const ConfigNavBar = () => {
   const data = useContext(DataContext);
+  let counter = 1;
+
+  const panelStyles = {
+    padding: "15px 20px",
+    color: "#aaa",
+    fontSize: "14px",
+  };
+  const dividerStyles = {
+    // height: "1px",
+    // backgroundColor: "#e5e5ea",
+  };
 
   return (
     <div
@@ -15,53 +26,113 @@ const ConfigNavBar = () => {
         paddingTop: "30px",
       }}
     >
-      <Sidenav defaultOpenKeys={["3", "4"]} activeKey="1">
-        <Sidenav.Body>
-          <Nav>
-            <Nav.Item eventKey="1" icon={<Icon icon="dashboard" />}>
-              Configuration
-            </Nav.Item>
-            <Nav.Item eventKey="2" icon={<Icon icon="dashboard" />}>
-              Title
-            </Nav.Item>
-            <Nav.Item eventKey="3" icon={<Icon icon="group" />}>
-              Subtitle
-            </Nav.Item>
-            <Dropdown
-              eventKey="4"
-              title="Header Links"
-              icon={<Icon icon="magic" />}
-            >
-              {data.headerLinks.map((headerLink) => (
-                <Dropdown.Item key={uuid()} eventKey={`4-${headerLink}`}>
-                  {headerLink}
-                </Dropdown.Item>
-              ))}
-            </Dropdown>
-            <Dropdown eventKey="5" title="Cubes" icon={<Icon icon="magic" />}>
-              {data.cubes.map((cube) => (
-                <Dropdown.Item key={uuid()} eventKey={`5-${cube.name}`}>
-                  {cube.name}
-                </Dropdown.Item>
-              ))}
-            </Dropdown>
+      <div style={{ position: "fixed", minWidth: "inherit" }}>
+        <Sidenav activeKey="1">
+          <Sidenav.Body>
+            <Nav>
+              {/* Configuration */}
+              <Nav.Item
+                panel
+                eventKey={counter++}
+                icon={<Icon icon="dashboard" />}
+                style={{
+                  padding: "15px 20px",
+                  color: "#1675e0",
+                  fontSize: "16px",
+                  fontWeight: "bold",
+                }}
+              >
+                Configuration
+              </Nav.Item>
 
-            <Dropdown
-              eventKey="6"
-              title="Settings"
-              icon={<Icon icon="gear-circle" />}
-            >
-              <Dropdown.Item eventKey="4-1">Applications</Dropdown.Item>
-              <Dropdown.Item eventKey="4-2">Channels</Dropdown.Item>
-              <Dropdown.Item eventKey="4-3">Versions</Dropdown.Item>
-              <Dropdown.Menu eventKey="4-5" title="Custom Action">
-                <Dropdown.Item eventKey="4-5-1">Action Name</Dropdown.Item>
-                <Dropdown.Item eventKey="4-5-2">Action Params</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </Nav>
-        </Sidenav.Body>
-      </Sidenav>
+              <Nav.Item panel style={panelStyles}>
+                Header
+              </Nav.Item>
+
+              {/* Title */}
+              <Nav.Item eventKey={counter++} icon={<Icon icon="dashboard" />}>
+                Title
+              </Nav.Item>
+
+              {/* Subtitle */}
+              <Nav.Item eventKey={counter++} icon={<Icon icon="group" />}>
+                Subtitle
+              </Nav.Item>
+
+              {/* Header Links */}
+              <Dropdown
+                eventKey={counter++}
+                title="Header Links"
+                icon={<Icon icon="magic" />}
+              >
+                {data.headerLinks.map((headerLink) => (
+                  <Dropdown.Item
+                    key={uuid()}
+                    eventKey={`${counter}-${headerLink}`}
+                  >
+                    {headerLink}
+                  </Dropdown.Item>
+                ))}
+              </Dropdown>
+
+              <Nav.Item divider style={dividerStyles} />
+              <Nav.Item panel style={panelStyles}>
+                Body
+              </Nav.Item>
+
+              {/* Cubes */}
+              <Dropdown
+                eventKey={counter++}
+                title="Cubes"
+                icon={<Icon icon="magic" />}
+              >
+                {data.cubes.map((cube) => (
+                  <Dropdown.Item
+                    key={uuid()}
+                    eventKey={`${counter}-${cube.name}`}
+                  >
+                    {cube.name}
+                  </Dropdown.Item>
+                ))}
+              </Dropdown>
+
+              {/* Pages */}
+              <Dropdown
+                eventKey={counter++}
+                title="Pages"
+                icon={<Icon icon="magic" />}
+              >
+                <Dropdown.Item>Home</Dropdown.Item>
+                <Dropdown.Item>Project</Dropdown.Item>
+                <Dropdown.Menu
+                  key={uuid()}
+                  eventKey={`${counter}-hlink`}
+                  title="Hlinks"
+                >
+                  {data.pages.hlinks.map((hlink) => (
+                    <Dropdown.Item key={uuid()}>{hlink.name}</Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+
+              <Nav.Item divider style={dividerStyles} />
+              <Nav.Item panel style={panelStyles}>
+                Footer
+              </Nav.Item>
+
+              {/* Footer text */}
+              <Nav.Item eventKey={counter++} icon={<Icon icon="dashboard" />}>
+                Footer Text
+              </Nav.Item>
+
+              <Nav.Item divider style={dividerStyles} />
+              <Nav.Item panel style={panelStyles}>
+                Settings
+              </Nav.Item>
+            </Nav>
+          </Sidenav.Body>
+        </Sidenav>
+      </div>
     </div>
   );
 };
