@@ -4,6 +4,7 @@ import Body from "./components/Body";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { DataContext } from "./providers/DataProvider";
+import ConfigNavBar from "./components/ConfigNovBar";
 
 function App() {
   const data = useContext(DataContext);
@@ -20,21 +21,24 @@ function App() {
   return (
     <>
       {data ? (
-        <Router>
-          <Switch>
-            <>
-              <div style={style.mainContainer}>
-                <div style={{ padding: "0px 6.94%" }}>
-                  <Header data={data} />
-                  <Route path="/">
-                    <Body data={data} />
-                  </Route>
+        <div style={{ display: "flex" }}>
+          <ConfigNavBar data={data} />
+          <Router>
+            <Switch>
+              <>
+                <div style={style.mainContainer}>
+                  <div style={{ padding: "0px 6.94%" }}>
+                    <Header data={data} />
+                    <Route path="/">
+                      <Body data={data} />
+                    </Route>
+                  </div>
+                  <Footer data={data} />
                 </div>
-                <Footer data={data} />
-              </div>
-            </>
-          </Switch>
-        </Router>
+              </>
+            </Switch>
+          </Router>
+        </div>
       ) : (
         <div></div>
       )}

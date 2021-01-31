@@ -24,7 +24,7 @@ figure {
   opacity: 0;
 }
 
-.fade:hover + .figure-text {
+.img-fade:hover + .figure-text {
   opacity: 1;
 }
 .image {
@@ -34,6 +34,6 @@ figure {
   transition: opacity 400ms;
 }
 
-.fade:hover {
+.img-fade:hover {
   opacity: 0.2;
 }

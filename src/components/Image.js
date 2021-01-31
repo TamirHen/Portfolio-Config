@@ -24,10 +24,10 @@ const Image = (props) => {
       }}
     >
       {page === "project" ? (
-        <img className={"image fade"} src={image} alt={name} />
+        <img className={"image img-fade"} src={image} alt={name} />
       ) : (
         <Link to={`/project/${id}`}>
-          <img className={"image fade"} src={image} alt={name} />
+          <img className={"image img-fade"} src={image} alt={name} />
         </Link>
       )}
     </figure>
