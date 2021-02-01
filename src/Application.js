@@ -21,24 +21,27 @@ function App() {
   return (
     <>
       {data ? (
-        <div style={{ display: "flex" }}>
-          <ConfigNavBar data={data} />
-          <Router>
-            <Switch>
-              <>
-                <div style={style.mainContainer}>
-                  <div style={{ padding: "0px 6.94%" }}>
-                    <Header data={data} />
-                    <Route path="/">
-                      <Body data={data} />
-                    </Route>
+        <>
+          <div className="shadow" />
+          <div style={{ display: "flex" }}>
+            <ConfigNavBar data={data} />
+            <Router>
+              <Switch>
+                <>
+                  <div style={style.mainContainer}>
+                    <div style={{ padding: "0px 6.94%" }}>
+                      <Header data={data} />
+                      <Route path="/">
+                        <Body data={data} />
+                      </Route>
+                    </div>
+                    <Footer data={data} />
                   </div>
-                  <Footer data={data} />
-                </div>
-              </>
-            </Switch>
-          </Router>
-        </div>
+                </>
+              </Switch>
+            </Router>
+          </div>
+        </>
       ) : (
         <div></div>
       )}
