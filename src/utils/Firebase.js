@@ -9,4 +9,6 @@ export const auth = firebase.auth();
 export const persistence = firebase.auth.Auth.Persistence;
 export const db = firebase.database().ref();
 
-export const update = (field) => {};
+export const updateDB = (path, newValue) => {
+  firebase.database().ref(path).set(newValue);
+};

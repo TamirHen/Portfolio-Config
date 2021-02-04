@@ -6,8 +6,9 @@ import { DataContext } from "../providers/DataProvider";
 
 import "./ConfigNovBar.css";
 
-const ConfigNavBar = () => {
+const ConfigNavBar = (props) => {
   const data = useContext(DataContext);
+  const { setDisplayPopup, setCube } = props;
   let counter = 1;
 
   const panelStyles = {
@@ -18,7 +19,6 @@ const ConfigNavBar = () => {
 
   return (
     <>
-      <div className="shadow" />
       <div
         style={{
           minWidth: "250px",
@@ -33,6 +33,7 @@ const ConfigNavBar = () => {
             overflow: "auto",
             height: "100vh",
             paddingTop: "30px",
+            paddingBottom: "50px",
           }}
         >
           <Sidenav activeKey="1">
@@ -99,6 +100,10 @@ const ConfigNavBar = () => {
                     <Dropdown.Item
                       key={uuid()}
                       eventKey={`${counter}-${cube.name}`}
+                      onSelect={() => {
+                        setCube(cube);
+                        setDisplayPopup(true);
+                      }}
                     >
                       {cube.name}
                     </Dropdown.Item>

@@ -1,13 +1,16 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { DataContext } from "./providers/DataProvider";
 import ConfigNavBar from "./components/ConfigNovBar";
+import Popup from "./components/Popup";
 
 function App() {
   const data = useContext(DataContext);
+  const [displayPopup, setDisplayPopup] = useState(false);
+  const [cube, setCube] = useState(null);
 
   const style = {
     mainContainer: {
@@ -15,20 +18,32 @@ function App() {
       flexDirection: "column",
       justifyContent: "space-between",
       minHeight: "100vh",
+      position: "relative",
     },
+  };
+
+  const onClosePopup = () => {
+    setDisplayPopup(false);
   };
 
   return (
     <>
       {data ? (
         <>
-          <div className="shadow" />
           <div style={{ display: "flex" }}>
-            <ConfigNavBar data={data} />
+            <ConfigNavBar
+              data={data}
+              setDisplayPopup={setDisplayPopup}
+              cube={cube}
+              setCube={setCube}
+            />
             <Router>
               <Switch>
                 <>
-                  <div style={style.mainContainer}>
+                  <div className="main-container" style={style.mainContainer}>
+                    {displayPopup && (
+                      <Popup cube={cube} onClose={onClosePopup} />
+                    )}
                     <div style={{ padding: "0px 6.94%" }}>
                       <Header data={data} />
                       <Route path="/">
