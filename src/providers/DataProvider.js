@@ -8,15 +8,11 @@ class DataProvider extends Component {
   };
 
   componentDidMount = () => {
-    db.once("value")
-      .then((snapshot) => {
-        this.setState({
-          data: snapshot.val(),
-        });
-      })
-      .catch((error) => {
-        console.error("Error: " + error.code);
+    db.on("value", (snapshot) => {
+      this.setState({
+        data: snapshot.val(),
       });
+    });
   };
 
   render() {

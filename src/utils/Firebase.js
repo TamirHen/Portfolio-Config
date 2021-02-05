@@ -10,5 +10,18 @@ export const persistence = firebase.auth.Auth.Persistence;
 export const db = firebase.database().ref();
 
 export const updateDB = (path, newValue) => {
-  firebase.database().ref(path).set(newValue);
+  firebase
+    .database()
+    .ref(path)
+    .set({ ...newValue }, (error) => {
+      if (error) {
+        throw error;
+      } else {
+        // Data saved...
+      }
+    })
+    .catch((error) => {
+      return error.message;
+    });
+  return "saved";
 };

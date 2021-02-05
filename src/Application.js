@@ -6,12 +6,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { DataContext } from "./providers/DataProvider";
 import ConfigNavBar from "./components/ConfigNovBar";
 import Popup from "./components/Popup";
+import uuid from "react-uuid";
 
 function App() {
   const data = useContext(DataContext);
   const [displayPopup, setDisplayPopup] = useState(false);
   const [cube, setCube] = useState(null);
-
+  const [popupKey, setPopupKey] = useState(uuid());
   const style = {
     mainContainer: {
       display: "flex",
@@ -22,8 +23,13 @@ function App() {
     },
   };
 
+  const rerenderPopup = () => {
+    setPopupKey(uuid());
+  };
+
   const onClosePopup = () => {
     setDisplayPopup(false);
+    setCube(null);
   };
 
   return (
@@ -36,13 +42,18 @@ function App() {
               setDisplayPopup={setDisplayPopup}
               cube={cube}
               setCube={setCube}
+              rerenderPopup={rerenderPopup}
             />
             <Router>
               <Switch>
                 <>
                   <div className="main-container" style={style.mainContainer}>
                     {displayPopup && (
-                      <Popup cube={cube} onClose={onClosePopup} />
+                      <Popup
+                        key={popupKey}
+                        cube={cube}
+                        onClose={onClosePopup}
+                      />
                     )}
                     <div style={{ padding: "0px 6.94%" }}>
                       <Header data={data} />

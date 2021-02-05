@@ -8,7 +8,7 @@ import "./ConfigNovBar.css";
 
 const ConfigNavBar = (props) => {
   const data = useContext(DataContext);
-  const { setDisplayPopup, setCube } = props;
+  const { rerenderPopup, setDisplayPopup, setCube } = props;
   let counter = 1;
 
   const panelStyles = {
@@ -96,13 +96,14 @@ const ConfigNavBar = (props) => {
                   title="Cubes"
                   icon={<Icon icon="cubes" />}
                 >
-                  {data.cubes.map((cube) => (
+                  {data.cubes.map((cube, index) => (
                     <Dropdown.Item
                       key={uuid()}
                       eventKey={`${counter}-${cube.name}`}
                       onSelect={() => {
-                        setCube(cube);
+                        setCube({ ...cube, index: index });
                         setDisplayPopup(true);
+                        rerenderPopup();
                       }}
                     >
                       {cube.name}
