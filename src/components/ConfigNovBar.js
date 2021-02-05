@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import uuid from "react-uuid";
-import { Sidenav, Nav, Dropdown, Icon } from "rsuite";
+import { Sidenav, Nav, Dropdown, IconButton, Icon } from "rsuite";
 import "rsuite/dist/styles/rsuite-default.css";
 import { DataContext } from "../providers/DataProvider";
+import { updateDB } from "../utils/Firebase";
 
 import "./ConfigNovBar.css";
 
@@ -120,6 +121,42 @@ const ConfigNavBar = (props) => {
                       {cube.name}
                     </Dropdown.Item>
                   ))}
+                  <div style={{ padding: "5px 0px 5px 56px" }}>
+                    <IconButton
+                      style={{
+                        marginRight: "5px",
+                        border: "1px solid #e5e5ea",
+                      }}
+                      icon={<Icon icon="plus" />}
+                      size="sm"
+                      onClick={() => {
+                        let cubes = data.cubes;
+                        cubes.push({
+                          id:
+                            cubes.length === 0
+                              ? 1
+                              : cubes[cubes.length - 1].id + 1,
+                          name: "New Cube",
+                          description: "",
+                          genre: "",
+                          image: "",
+                        });
+                        updateDB("cubes", cubes);
+                        closePopup();
+                      }}
+                    />
+                    <IconButton
+                      style={{ marginLeft: "5px", border: "1px solid #e5e5ea" }}
+                      icon={<Icon icon="minus" />}
+                      size="sm"
+                      onClick={() => {
+                        let cubes = data.cubes;
+                        cubes.pop();
+                        updateDB("cubes", cubes);
+                        closePopup();
+                      }}
+                    />
+                  </div>
                 </Dropdown>
 
                 {/* Pages */}

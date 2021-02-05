@@ -11,7 +11,7 @@
 .popup {
   background-color: white;
   width: 400px;
-  position: fixed;
+  position: absolute;
   top: 18vh;
   padding: 20px;
   border-radius: 5px;
