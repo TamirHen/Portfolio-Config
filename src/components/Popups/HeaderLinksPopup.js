@@ -14,7 +14,7 @@ const HeaderLinksPopup = (props) => {
 
   return (
     <>
-      <h4 style={{ textAlign: "center", marginBottom: "5px" }}>Header Links</h4>
+      <h4 className="popup-header">Header Links</h4>
 
       {headerLinks.map((link) => {
         counter++;

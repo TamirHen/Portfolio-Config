@@ -6,7 +6,7 @@ const HeaderTextPopup = (props) => {
 
   return (
     <>
-      <h4 style={{ textAlign: "center" }}>Header Text</h4>
+      <h4 className="popup-header">Header Text</h4>
 
       <div className="popup-field">
         <h6 className="popup-field-header">Title: </h6>

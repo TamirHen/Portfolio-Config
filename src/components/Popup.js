@@ -64,7 +64,7 @@ const Popup = (props) => {
           />
         )}
         <div className="save-button-wrapper">
-          <Button type="submit" className="save-button" color="green">
+          <Button type="submit" className="save-button" color="blue">
             Save
           </Button>
         </div>

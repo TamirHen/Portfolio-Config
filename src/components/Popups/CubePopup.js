@@ -6,6 +6,8 @@ const CubePopup = (props) => {
 
   return (
     <>
+      <h4 className="popup-header">Cube</h4>
+
       <div className="popup-field">
         <h6 className="popup-field-header">ID: </h6>
         <Input disabled defaultValue={cube.id} name="cubeId" />

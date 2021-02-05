@@ -17,6 +17,12 @@
   border-radius: 5px;
 }
 
+.popup-header {
+  text-align: center;
+  margin-bottom: 5px;
+  color: rgb(22, 117, 224) !important;
+}
+
 textarea {
   resize: none !important;
 }
@@ -26,7 +32,7 @@ textarea {
 }
 
 .popup-field-header {
-  color: #74747b !important;
+  color: #469ef9 !important;
 }
 
 .close-button {
