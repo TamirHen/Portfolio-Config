@@ -1,11 +1,17 @@
-import React from "react";
-import { Input, Button } from "rsuite";
+import React, { useState } from "react";
+import { Button } from "rsuite";
 import { updateDB } from "../utils/Firebase";
+import uuid from "react-uuid";
 
 import "./Popup.css";
+import CubePopup from "./Popups/CubePopup";
+import HeaderTextPopup from "./Popups/HeaderTextPopup";
+import HeaderLinksPopup from "./Popups/HeaderLinksPopup";
 
 const Popup = (props) => {
-  const { onClose, cube, headerText } = props;
+  const { onClose, cube, headerText, headerLinks, setHeaderLinks } = props;
+  const [numOfHeaderLinks, setNumOfHeaderLinks] = useState(0);
+  const [headerLinksKey, setHeaderLinksKey] = useState(uuid());
 
   const submit = (event) => {
     event.preventDefault();
@@ -29,6 +35,13 @@ const Popup = (props) => {
         updateDB("subtitle", fields.subtitle) === "saved" &&
         onClose();
       return;
+    } else if (headerLinks) {
+      fields = [];
+      for (let index = 1; index <= numOfHeaderLinks; index++) {
+        fields.push(event.target[`link-${index}`].value);
+      }
+      updateDB("headerLinks", fields) === "saved" && onClose();
+      return;
     }
   };
 
@@ -38,49 +51,17 @@ const Popup = (props) => {
         <div className="close-button" onClick={onClose}>
           X
         </div>
-        {cube && (
-          <>
-            <div className="popup-field">
-              <h6 className="popup-field-header">ID: </h6>
-              <Input disabled defaultValue={cube.id} name="cubeId" />
-            </div>
-            <div className="popup-field">
-              <h6 className="popup-field-header">Name: </h6>
-              <Input defaultValue={cube.name} name="cubeName" />
-            </div>
-            <div className="popup-field">
-              <h6 className="popup-field-header">Description: </h6>
-              <Input
-                componentClass="textarea"
-                rows={3}
-                defaultValue={cube.description}
-                name="cubeDescription"
-              />
-            </div>
-            <div className="popup-field">
-              <h6 className="popup-field-header">Genre: </h6>
-              <Input defaultValue={cube.genre} name="cubeGenre" />
-            </div>
-            <div className="popup-field">
-              <h6 className="popup-field-header">Image URL: </h6>
-              <Input defaultValue={cube.image} name="cubeImage" />
-            </div>
-          </>
-        )}
-        {headerText && (
-          <>
-            <div className="popup-field">
-              <h6 className="popup-field-header">Title: </h6>
-              <Input defaultValue={headerText.title} name="headerTextTitle" />
-            </div>
-            <div className="popup-field">
-              <h6 className="popup-field-header">Subtitle: </h6>
-              <Input
-                defaultValue={headerText.subtitle}
-                name="headerTextSubtitle"
-              />
-            </div>
-          </>
+        {cube && <CubePopup cube={cube} />}
+        {headerText && <HeaderTextPopup headerText={headerText} />}
+        {headerLinks && (
+          <HeaderLinksPopup
+            key={headerLinksKey}
+            headerLinks={headerLinks}
+            setHeaderLinks={setHeaderLinks}
+            numOfHeaderLinks={numOfHeaderLinks}
+            setNumOfHeaderLinks={setNumOfHeaderLinks}
+            setHeaderLinksKey={setHeaderLinksKey}
+          />
         )}
         <div className="save-button-wrapper">
           <Button type="submit" className="save-button" color="green">

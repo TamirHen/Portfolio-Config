@@ -16,8 +16,6 @@ export const updateDB = (path, newValue) => {
     .set(newValue, (error) => {
       if (error) {
         throw error;
-      } else {
-        // Data saved...
       }
     })
     .catch((error) => {

@@ -8,7 +8,15 @@ import "./ConfigNovBar.css";
 
 const ConfigNavBar = (props) => {
   const data = useContext(DataContext);
-  const { rerenderPopup, setDisplayPopup, setCube, setHeaderText } = props;
+  const {
+    rerenderPopup,
+    displayPopup,
+    setDisplayPopup,
+    setCube,
+    setHeaderText,
+    setHeaderLinks,
+    closePopup,
+  } = props;
   let counter = 1;
 
   const panelStyles = {
@@ -62,6 +70,7 @@ const ConfigNavBar = (props) => {
                   className="nav-item"
                   icon={<Icon icon="pencil" />}
                   onClick={() => {
+                    displayPopup && closePopup();
                     setHeaderText({
                       title: data.title,
                       subtitle: data.subtitle,
@@ -74,20 +83,18 @@ const ConfigNavBar = (props) => {
                 </Nav.Item>
 
                 {/* Header Links */}
-                <Dropdown
+                <Nav.Item
                   eventKey={counter++}
-                  title="Links"
                   icon={<Icon icon="link" />}
+                  onClick={() => {
+                    displayPopup && closePopup();
+                    setHeaderLinks(data.headerLinks);
+                    setDisplayPopup(true);
+                    rerenderPopup();
+                  }}
                 >
-                  {data.headerLinks.map((headerLink) => (
-                    <Dropdown.Item
-                      key={uuid()}
-                      eventKey={`${counter}-${headerLink}`}
-                    >
-                      {headerLink}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown>
+                  Links
+                </Nav.Item>
 
                 <Nav.Item panel style={panelStyles}>
                   Body
@@ -104,6 +111,7 @@ const ConfigNavBar = (props) => {
                       key={uuid()}
                       eventKey={`${counter}-${cube.name}`}
                       onClick={() => {
+                        displayPopup && closePopup();
                         setCube({ ...cube, index: index });
                         setDisplayPopup(true);
                         rerenderPopup();

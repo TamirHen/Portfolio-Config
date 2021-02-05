@@ -13,6 +13,7 @@ function App() {
   const [displayPopup, setDisplayPopup] = useState(false);
   const [cube, setCube] = useState(null);
   const [headerText, setHeaderText] = useState(null);
+  const [headerLinks, setHeaderLinks] = useState(null);
   const [popupKey, setPopupKey] = useState(uuid());
 
   const style = {
@@ -33,6 +34,7 @@ function App() {
     setDisplayPopup(false);
     setCube(null);
     setHeaderText(null);
+    setHeaderLinks(null);
   };
 
   return (
@@ -42,11 +44,14 @@ function App() {
           <div style={{ display: "flex" }}>
             <ConfigNavBar
               data={data}
+              displayPopup={displayPopup}
               setDisplayPopup={setDisplayPopup}
               cube={cube}
               setCube={setCube}
               setHeaderText={setHeaderText}
+              setHeaderLinks={setHeaderLinks}
               rerenderPopup={rerenderPopup}
+              closePopup={onClosePopup}
             />
             <Router>
               <Switch>
@@ -57,6 +62,8 @@ function App() {
                         key={popupKey}
                         cube={cube}
                         headerText={headerText}
+                        headerLinks={headerLinks}
+                        setHeaderLinks={setHeaderLinks}
                         onClose={onClosePopup}
                       />
                     )}
