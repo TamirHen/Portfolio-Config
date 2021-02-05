@@ -13,7 +13,7 @@ export const updateDB = (path, newValue) => {
   firebase
     .database()
     .ref(path)
-    .set({ ...newValue }, (error) => {
+    .set(newValue, (error) => {
       if (error) {
         throw error;
       } else {

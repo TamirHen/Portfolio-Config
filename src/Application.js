@@ -12,7 +12,9 @@ function App() {
   const data = useContext(DataContext);
   const [displayPopup, setDisplayPopup] = useState(false);
   const [cube, setCube] = useState(null);
+  const [headerText, setHeaderText] = useState(null);
   const [popupKey, setPopupKey] = useState(uuid());
+
   const style = {
     mainContainer: {
       display: "flex",
@@ -30,6 +32,7 @@ function App() {
   const onClosePopup = () => {
     setDisplayPopup(false);
     setCube(null);
+    setHeaderText(null);
   };
 
   return (
@@ -42,6 +45,7 @@ function App() {
               setDisplayPopup={setDisplayPopup}
               cube={cube}
               setCube={setCube}
+              setHeaderText={setHeaderText}
               rerenderPopup={rerenderPopup}
             />
             <Router>
@@ -52,6 +56,7 @@ function App() {
                       <Popup
                         key={popupKey}
                         cube={cube}
+                        headerText={headerText}
                         onClose={onClosePopup}
                       />
                     )}

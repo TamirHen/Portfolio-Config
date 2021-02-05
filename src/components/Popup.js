@@ -5,7 +5,7 @@ import { updateDB } from "../utils/Firebase";
 import "./Popup.css";
 
 const Popup = (props) => {
-  const { onClose, cube } = props;
+  const { onClose, cube, headerText } = props;
 
   const submit = (event) => {
     event.preventDefault();
@@ -19,6 +19,16 @@ const Popup = (props) => {
         image: event.target.cubeImage.value,
       };
       updateDB(`cubes/${cube.index}`, fields) === "saved" && onClose();
+      return;
+    } else if (headerText) {
+      fields = {
+        title: event.target.headerTextTitle.value,
+        subtitle: event.target.headerTextSubtitle.value,
+      };
+      updateDB("title", fields.title) === "saved" &&
+        updateDB("subtitle", fields.subtitle) === "saved" &&
+        onClose();
+      return;
     }
   };
 
@@ -54,6 +64,21 @@ const Popup = (props) => {
             <div className="popup-field">
               <h6 className="popup-field-header">Image URL: </h6>
               <Input defaultValue={cube.image} name="cubeImage" />
+            </div>
+          </>
+        )}
+        {headerText && (
+          <>
+            <div className="popup-field">
+              <h6 className="popup-field-header">Title: </h6>
+              <Input defaultValue={headerText.title} name="headerTextTitle" />
+            </div>
+            <div className="popup-field">
+              <h6 className="popup-field-header">Subtitle: </h6>
+              <Input
+                defaultValue={headerText.subtitle}
+                name="headerTextSubtitle"
+              />
             </div>
           </>
         )}
