@@ -172,6 +172,7 @@ const ConfigNavBar = (props) => {
                         <Dropdown.Item
                           key={uuid()}
                           onClick={() => {
+                            displayPopup && closePopup();
                             setHomepage(key);
                             setDisplayPopup(true);
                             rerenderPopup();

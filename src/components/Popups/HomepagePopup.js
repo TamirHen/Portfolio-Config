@@ -1,8 +1,11 @@
-import React from "react";
-import { Input } from "rsuite";
+import React, { useContext } from "react";
+import { Input, Dropdown, Divider } from "rsuite";
+import { DataContext } from "../../providers/DataProvider";
 
 const HomepagePopup = (props) => {
+  const data = useContext(DataContext);
   const { homepage } = props;
+  const cubes = data.cubes;
 
   return (
     <>
@@ -69,39 +72,76 @@ const HomepagePopup = (props) => {
         </>
       ) : (
         <>
-          <div className="popup-field">
-            <h6 className="popup-field-header">Desktop: </h6>
-            <Input
-              defaultValue={homepage.grid?.rows}
-              name="homepageDesktopGridRows"
-            />
-            <Input
-              defaultValue={homepage.grid?.columns}
-              name="homepageDesktopGridColumns"
-            />
-          </div>
-          <div className="popup-field">
-            <h6 className="popup-field-header">Tablet: </h6>
-            <Input
-              defaultValue={homepage.grid?.tablet?.rows}
-              name="homepageTabletGridRows"
-            />
-            <Input
-              defaultValue={homepage.grid?.tablet?.columns}
-              name="homepageTabletGridColumns"
-            />
-          </div>
-          <div className="popup-field">
-            <h6 className="popup-field-header">Mobile: </h6>
-            <Input
-              defaultValue={homepage.grid?.mobile?.rows}
-              name="homepageMobileGridRows"
-            />
-            <Input
-              defaultValue={homepage.grid?.mobile?.columns}
-              name="homepageMobileGridColumns"
-            />
-          </div>
+          {data.pages.home.images.map((image) => (
+            <>
+              <div className="popup-field">
+                <Divider style={{ margin: "0px 0px 5px 0px" }} />
+                <div className="image-dropdown-wrapper">
+                  <h5 className="popup-field-header centered">Image:</h5>
+                  <Dropdown
+                    title={cubes.find((cube) => cube.id === image.cubeId).name}
+                  >
+                    {cubes.map((cube) => {
+                      return <Dropdown.Item>{cube.name}</Dropdown.Item>;
+                    })}
+                  </Dropdown>
+                </div>
+
+                <h6 className="popup-field-header">Desktop: </h6>
+                <div className="one-line-inputs">
+                  <Input
+                    className="one-line-item"
+                    defaultValue={homepage.grid?.rows}
+                    name="homepageDesktopGridRows"
+                    placeholder="Rows"
+                  />
+                  X
+                  <Input
+                    className="one-line-item"
+                    defaultValue={homepage.grid?.columns}
+                    name="homepageDesktopGridColumns"
+                    placeholder="Columns"
+                  />
+                </div>
+              </div>
+              <div className="popup-field">
+                <h6 className="popup-field-header">Tablet: </h6>
+                <div className="one-line-inputs">
+                  <Input
+                    className="one-line-item"
+                    defaultValue={homepage.grid?.rows}
+                    name="homepageTabletGridRows"
+                    placeholder="Rows"
+                  />
+                  X
+                  <Input
+                    className="one-line-item"
+                    defaultValue={homepage.grid?.columns}
+                    name="homepageTabletGridColumns"
+                    placeholder="Columns"
+                  />
+                </div>
+              </div>
+              <div className="popup-field">
+                <h6 className="popup-field-header">Mobile: </h6>
+                <div className="one-line-inputs">
+                  <Input
+                    className="one-line-item"
+                    defaultValue={homepage.grid?.rows}
+                    name="homepageMobileGridRows"
+                    placeholder="Rows"
+                  />
+                  X
+                  <Input
+                    className="one-line-item"
+                    defaultValue={homepage.grid?.columns}
+                    name="homepageMobileGridColumns"
+                    placeholder="Columns"
+                  />
+                </div>
+              </div>
+            </>
+          ))}
         </>
       )}
     </>

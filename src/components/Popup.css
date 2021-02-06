@@ -12,9 +12,11 @@
   background-color: white;
   width: 400px;
   position: absolute;
-  top: 18vh;
+  top: 16vh;
   padding: 20px;
   border-radius: 5px;
+  max-height: 600px;
+  overflow: auto;
 }
 
 .popup-header {
@@ -44,8 +46,8 @@ textarea {
   padding: 3px 9px;
   margin: 5px;
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 5px;
+  right: 5px;
   cursor: pointer;
 }
 
@@ -72,4 +74,14 @@ textarea {
   flex-grow: 1;
   margin: 10px;
   text-align: center;
+}
+
+.centered {
+  text-align: center;
+}
+
+.image-dropdown-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
