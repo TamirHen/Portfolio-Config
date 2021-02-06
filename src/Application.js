@@ -15,6 +15,7 @@ function App() {
   const [headerText, setHeaderText] = useState(null);
   const [headerLinks, setHeaderLinks] = useState(null);
   const [popupKey, setPopupKey] = useState(uuid());
+  const [homepage, setHomepage] = useState(null);
 
   const style = {
     mainContainer: {
@@ -22,6 +23,7 @@ function App() {
       flexDirection: "column",
       justifyContent: "space-between",
       minHeight: "100vh",
+      width: "100%",
       position: "relative",
     },
   };
@@ -35,6 +37,7 @@ function App() {
     setCube(null);
     setHeaderText(null);
     setHeaderLinks(null);
+    setHomepage(null);
   };
 
   return (
@@ -50,6 +53,7 @@ function App() {
               setCube={setCube}
               setHeaderText={setHeaderText}
               setHeaderLinks={setHeaderLinks}
+              setHomepage={setHomepage}
               rerenderPopup={rerenderPopup}
               closePopup={onClosePopup}
             />
@@ -64,6 +68,7 @@ function App() {
                         headerText={headerText}
                         headerLinks={headerLinks}
                         setHeaderLinks={setHeaderLinks}
+                        homepage={homepage}
                         onClose={onClosePopup}
                       />
                     )}

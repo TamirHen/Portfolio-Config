@@ -16,6 +16,7 @@ const ConfigNavBar = (props) => {
     setCube,
     setHeaderText,
     setHeaderLinks,
+    setHomepage,
     closePopup,
   } = props;
   let counter = 1;
@@ -165,8 +166,34 @@ const ConfigNavBar = (props) => {
                   title="Pages"
                   icon={<Icon icon="web" />}
                 >
-                  <Dropdown.Item>Home</Dropdown.Item>
-                  <Dropdown.Item>Project</Dropdown.Item>
+                  <Dropdown.Menu title="Home" eventKey={`${counter}-home`}>
+                    {Object.keys(data.pages.home).map((key) => {
+                      return (
+                        <Dropdown.Item
+                          key={uuid()}
+                          onClick={() => {
+                            setHomepage(key);
+                            setDisplayPopup(true);
+                            rerenderPopup();
+                          }}
+                        >
+                          {key.charAt(0).toUpperCase() + key.slice(1)}
+                        </Dropdown.Item>
+                      );
+                    })}
+                  </Dropdown.Menu>
+                  <Dropdown.Menu
+                    title="Project"
+                    eventKey={`${counter}-project`}
+                  >
+                    {Object.keys(data.pages.project).map((key) => {
+                      return (
+                        <Dropdown.Item key={uuid()}>
+                          {key.charAt(0).toUpperCase() + key.slice(1)}
+                        </Dropdown.Item>
+                      );
+                    })}
+                  </Dropdown.Menu>
                   <Dropdown.Menu
                     key={uuid()}
                     eventKey={`${counter}-hlink`}

@@ -7,9 +7,17 @@ import "./Popup.css";
 import CubePopup from "./Popups/CubePopup";
 import HeaderTextPopup from "./Popups/HeaderTextPopup";
 import HeaderLinksPopup from "./Popups/HeaderLinksPopup";
+import HomepagePopup from "./Popups/HomepagePopup";
 
 const Popup = (props) => {
-  const { onClose, cube, headerText, headerLinks, setHeaderLinks } = props;
+  const {
+    onClose,
+    cube,
+    headerText,
+    headerLinks,
+    setHeaderLinks,
+    homepage,
+  } = props;
   const [numOfHeaderLinks, setNumOfHeaderLinks] = useState(0);
   const [headerLinksKey, setHeaderLinksKey] = useState(uuid());
 
@@ -42,6 +50,8 @@ const Popup = (props) => {
       }
       updateDB("headerLinks", fields) === "saved" && onClose();
       return;
+    } else if (homepage) {
+      return;
     }
   };
 
@@ -63,6 +73,7 @@ const Popup = (props) => {
             setHeaderLinksKey={setHeaderLinksKey}
           />
         )}
+        {homepage && <HomepagePopup homepage={homepage} />}
         <div className="save-button-wrapper">
           <Button type="submit" className="save-button" color="blue">
             Save
