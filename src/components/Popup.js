@@ -51,6 +51,8 @@ const Popup = (props) => {
       updateDB("headerLinks", fields) === "saved" && onClose();
       return;
     } else if (homepage) {
+      if (homepage === "grid") {
+      }
       return;
     }
   };

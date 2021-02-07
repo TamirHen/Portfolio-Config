@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
+import uuid from "react-uuid";
 import { Input, Dropdown, Divider } from "rsuite";
 import { DataContext } from "../../providers/DataProvider";
+import ImagePositionInput from "../ImagePositionInput";
 
 const HomepagePopup = (props) => {
   const data = useContext(DataContext);
@@ -20,14 +22,14 @@ const HomepagePopup = (props) => {
             <div className="one-line-inputs">
               <Input
                 className="one-line-item"
-                defaultValue={homepage.grid?.rows}
+                defaultValue={data.pages.home.grid?.rows}
                 name="homepageDesktopGridRows"
                 placeholder="Rows"
               />
               X
               <Input
                 className="one-line-item"
-                defaultValue={homepage.grid?.columns}
+                defaultValue={data.pages.home.grid?.columns}
                 name="homepageDesktopGridColumns"
                 placeholder="Columns"
               />
@@ -38,14 +40,14 @@ const HomepagePopup = (props) => {
             <div className="one-line-inputs">
               <Input
                 className="one-line-item"
-                defaultValue={homepage.grid?.rows}
+                defaultValue={data.pages.home.grid?.tablet?.rows}
                 name="homepageTabletGridRows"
                 placeholder="Rows"
               />
               X
               <Input
                 className="one-line-item"
-                defaultValue={homepage.grid?.columns}
+                defaultValue={data.pages.home.grid?.tablet?.columns}
                 name="homepageTabletGridColumns"
                 placeholder="Columns"
               />
@@ -56,14 +58,14 @@ const HomepagePopup = (props) => {
             <div className="one-line-inputs">
               <Input
                 className="one-line-item"
-                defaultValue={homepage.grid?.rows}
+                defaultValue={data.pages.home.grid?.mobile?.rows}
                 name="homepageMobileGridRows"
                 placeholder="Rows"
               />
               X
               <Input
                 className="one-line-item"
-                defaultValue={homepage.grid?.columns}
+                defaultValue={data.pages.home.grid?.mobile?.columns}
                 name="homepageMobileGridColumns"
                 placeholder="Columns"
               />
@@ -72,8 +74,8 @@ const HomepagePopup = (props) => {
         </>
       ) : (
         <>
-          {data.pages.home.images.map((image) => (
-            <>
+          {data.pages.home.images.map((image, index) => (
+            <div key={uuid()}>
               <div className="popup-field">
                 <Divider style={{ margin: "0px 0px 5px 0px" }} />
                 <div className="image-dropdown-wrapper">
@@ -82,65 +84,25 @@ const HomepagePopup = (props) => {
                     title={cubes.find((cube) => cube.id === image.cubeId).name}
                   >
                     {cubes.map((cube) => {
-                      return <Dropdown.Item>{cube.name}</Dropdown.Item>;
+                      return (
+                        <Dropdown.Item key={uuid()}>{cube.name}</Dropdown.Item>
+                      );
                     })}
                   </Dropdown>
                 </div>
 
                 <h6 className="popup-field-header">Desktop: </h6>
-                <div className="one-line-inputs">
-                  <Input
-                    className="one-line-item"
-                    defaultValue={homepage.grid?.rows}
-                    name="homepageDesktopGridRows"
-                    placeholder="Rows"
-                  />
-                  X
-                  <Input
-                    className="one-line-item"
-                    defaultValue={homepage.grid?.columns}
-                    name="homepageDesktopGridColumns"
-                    placeholder="Columns"
-                  />
-                </div>
+                <ImagePositionInput index={index} />
               </div>
               <div className="popup-field">
                 <h6 className="popup-field-header">Tablet: </h6>
-                <div className="one-line-inputs">
-                  <Input
-                    className="one-line-item"
-                    defaultValue={homepage.grid?.rows}
-                    name="homepageTabletGridRows"
-                    placeholder="Rows"
-                  />
-                  X
-                  <Input
-                    className="one-line-item"
-                    defaultValue={homepage.grid?.columns}
-                    name="homepageTabletGridColumns"
-                    placeholder="Columns"
-                  />
-                </div>
+                <ImagePositionInput index={index} isTablet={true} />
               </div>
               <div className="popup-field">
                 <h6 className="popup-field-header">Mobile: </h6>
-                <div className="one-line-inputs">
-                  <Input
-                    className="one-line-item"
-                    defaultValue={homepage.grid?.rows}
-                    name="homepageMobileGridRows"
-                    placeholder="Rows"
-                  />
-                  X
-                  <Input
-                    className="one-line-item"
-                    defaultValue={homepage.grid?.columns}
-                    name="homepageMobileGridColumns"
-                    placeholder="Columns"
-                  />
-                </div>
+                <ImagePositionInput index={index} isMobile={true} />
               </div>
-            </>
+            </div>
           ))}
         </>
       )}
