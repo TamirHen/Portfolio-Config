@@ -69,6 +69,52 @@ const Popup = (props) => {
         };
         updateDB("pages/home/grid", fields) && onClose();
       } else {
+        let index = 0;
+        images.forEach((image) => {
+          image.rowStart = Number(
+            event.target[`homepageDesktopImage${index}-rowStart`].value
+          );
+          image.rowEnd =
+            Number(event.target[`homepageDesktopImage${index}-rowEnd`].value) +
+            1;
+          image.columnStart = Number(
+            event.target[`homepageDesktopImage${index}-columnStart`].value
+          );
+          image.columnEnd =
+            Number(
+              event.target[`homepageDesktopImage${index}-columnEnd`].value
+            ) + 1;
+
+          image.tablet.rowStart = Number(
+            event.target[`homepageTabletImage${index}-rowStart`].value
+          );
+          image.tablet.rowEnd =
+            Number(event.target[`homepageTabletImage${index}-rowEnd`].value) +
+            1;
+          image.tablet.columnStart = Number(
+            event.target[`homepageTabletImage${index}-columnStart`].value
+          );
+          image.tablet.columnEnd =
+            Number(
+              event.target[`homepageTabletImage${index}-columnEnd`].value
+            ) + 1;
+
+          image.mobile.rowStart = Number(
+            event.target[`homepageMobileImage${index}-rowStart`].value
+          );
+          image.mobile.rowEnd =
+            Number(event.target[`homepageMobileImage${index}-rowEnd`].value) +
+            1;
+          image.mobile.columnStart = Number(
+            event.target[`homepageMobileImage${index}-columnStart`].value
+          );
+          image.mobile.columnEnd =
+            Number(
+              event.target[`homepageMobileImage${index}-columnEnd`].value
+            ) + 1;
+
+          index++;
+        });
         updateDB("pages/home/images", images) && onClose();
       }
       return;
