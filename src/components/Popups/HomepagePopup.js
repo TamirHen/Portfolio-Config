@@ -99,6 +99,7 @@ const HomepagePopup = (props) => {
                           onClick={(event) => {
                             pickedImages[index] = event.target.textContent;
                             setPickedImages(pickedImages);
+                            images[index].cubeId = cube.id;
                             setRerenderDropdown(uuid());
                           }}
                         >

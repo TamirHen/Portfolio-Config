@@ -69,14 +69,7 @@ const Popup = (props) => {
         };
         updateDB("pages/home/grid", fields) && onClose();
       } else {
-        console.log(images);
-        // for (let index = 0; index < images.length; index++) {
-        //   images[index].cubeId = data.cubes.find(
-        //     (cube) => cube.name === event.target[`cubesDropdown${index}`]?.value
-        //   )?.id;
-        // }
-        // console.log(event.target.elements[`cubesDropdown${1}`]?.value);
-        // updateDB("pages/home/images", images) && onClose();
+        updateDB("pages/home/images", images) && onClose();
       }
       return;
     }
