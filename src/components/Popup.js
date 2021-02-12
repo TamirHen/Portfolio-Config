@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button } from "rsuite";
 import { updateDB } from "../utils/Firebase";
 import uuid from "react-uuid";
+import { DataContext } from "../providers/DataProvider";
 
 import "./Popup.css";
 import CubePopup from "./Popups/CubePopup";
@@ -10,6 +11,7 @@ import HeaderLinksPopup from "./Popups/HeaderLinksPopup";
 import HomepagePopup from "./Popups/HomepagePopup";
 
 const Popup = (props) => {
+  const data = useContext(DataContext);
   const {
     onClose,
     cube,
@@ -20,6 +22,7 @@ const Popup = (props) => {
   } = props;
   const [numOfHeaderLinks, setNumOfHeaderLinks] = useState(0);
   const [headerLinksKey, setHeaderLinksKey] = useState(uuid());
+  const [images, setImages] = useState(data.pages.home.images);
 
   const submit = (event) => {
     event.preventDefault();
@@ -52,6 +55,28 @@ const Popup = (props) => {
       return;
     } else if (homepage) {
       if (homepage === "grid") {
+        fields = {
+          rows: parseInt(event.target.homepageDesktopGridRows.value),
+          columns: parseInt(event.target.homepageDesktopGridColumns.value),
+          tablet: {
+            rows: parseInt(event.target.homepageTabletGridRows.value),
+            columns: parseInt(event.target.homepageTabletGridColumns.value),
+          },
+          mobile: {
+            rows: parseInt(event.target.homepageMobileGridRows.value),
+            columns: parseInt(event.target.homepageMobileGridColumns.value),
+          },
+        };
+        updateDB("pages/home/grid", fields) && onClose();
+      } else {
+        console.log(images);
+        // for (let index = 0; index < images.length; index++) {
+        //   images[index].cubeId = data.cubes.find(
+        //     (cube) => cube.name === event.target[`cubesDropdown${index}`]?.value
+        //   )?.id;
+        // }
+        // console.log(event.target.elements[`cubesDropdown${1}`]?.value);
+        // updateDB("pages/home/images", images) && onClose();
       }
       return;
     }
@@ -75,7 +100,13 @@ const Popup = (props) => {
             setHeaderLinksKey={setHeaderLinksKey}
           />
         )}
-        {homepage && <HomepagePopup homepage={homepage} />}
+        {homepage && (
+          <HomepagePopup
+            homepage={homepage}
+            images={images}
+            setImages={setImages}
+          />
+        )}
         <div className="save-button-wrapper">
           <Button type="submit" className="save-button" color="blue">
             Save

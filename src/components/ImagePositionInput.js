@@ -43,11 +43,11 @@ const ImagePositionInput = (props) => {
         <Input
           className="one-line-item"
           defaultValue={
-            isMobile
+            (isMobile
               ? data.pages.home.images[index]?.mobile?.rowEnd
               : isTablet
               ? data.pages.home.images[index]?.tablet?.rowEnd
-              : data.pages.home.images[index]?.rowEnd
+              : data.pages.home.images[index]?.rowEnd) - 1
           }
           name={`homepage${
             isMobile ? "Mobile" : isTablet ? "Tablet" : "Desktop"
@@ -58,11 +58,11 @@ const ImagePositionInput = (props) => {
         <Input
           className="one-line-item"
           defaultValue={
-            isMobile
+            (isMobile
               ? data.pages.home.images[index]?.mobile?.columnEnd
               : isTablet
               ? data.pages.home.images[index]?.tablet?.columnEnd
-              : data.pages.home.images[index]?.columnEnd
+              : data.pages.home.images[index]?.columnEnd) - 1
           }
           name={`homepage${
             isMobile ? "Mobile" : isTablet ? "Tablet" : "Desktop"

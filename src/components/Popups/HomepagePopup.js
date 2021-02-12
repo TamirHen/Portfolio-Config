@@ -1,13 +1,20 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import uuid from "react-uuid";
-import { Input, Dropdown, Divider } from "rsuite";
+import { Input, Dropdown, Divider, IconButton, Icon } from "rsuite";
 import { DataContext } from "../../providers/DataProvider";
 import ImagePositionInput from "../ImagePositionInput";
 
 const HomepagePopup = (props) => {
   const data = useContext(DataContext);
-  const { homepage } = props;
+  const { homepage, images, setImages } = props;
   const cubes = data.cubes;
+  const [imagesKey, setImagesKey] = useState(uuid());
+  const [pickedImages, setPickedImages] = useState(
+    images.map((image) => {
+      return cubes.find((cube) => cube.id === image.cubeId).name;
+    })
+  );
+  const [rerenderDropdown, setRerenderDropdown] = useState(uuid());
 
   return (
     <>
@@ -74,18 +81,29 @@ const HomepagePopup = (props) => {
         </>
       ) : (
         <>
-          {data.pages.home.images.map((image, index) => (
-            <div key={uuid()}>
+          {images.map((image, index) => (
+            <div key={imagesKey + index}>
               <div className="popup-field">
                 <Divider style={{ margin: "0px 0px 5px 0px" }} />
                 <div className="image-dropdown-wrapper">
                   <h5 className="popup-field-header centered">Image:</h5>
                   <Dropdown
-                    title={cubes.find((cube) => cube.id === image.cubeId).name}
+                    title={pickedImages[index]}
+                    name={"cubesDropdown" + index}
+                    key={rerenderDropdown}
                   >
                     {cubes.map((cube) => {
                       return (
-                        <Dropdown.Item key={uuid()}>{cube.name}</Dropdown.Item>
+                        <Dropdown.Item
+                          key={uuid()}
+                          onClick={(event) => {
+                            pickedImages[index] = event.target.textContent;
+                            setPickedImages(pickedImages);
+                            setRerenderDropdown(uuid());
+                          }}
+                        >
+                          {cube.name}
+                        </Dropdown.Item>
                       );
                     })}
                   </Dropdown>
@@ -104,6 +122,50 @@ const HomepagePopup = (props) => {
               </div>
             </div>
           ))}
+          <div style={{ position: "absolute", right: "15px" }}>
+            <IconButton
+              style={{ margin: "5px", border: "1px solid #e5e5ea" }}
+              icon={<Icon icon="plus" />}
+              size="md"
+              onClick={() => {
+                images.push({
+                  cubeId: 1,
+                  rowStart: 0,
+                  rowEnd: 1,
+                  columnStart: 0,
+                  columnEnd: 1,
+                  mobile: {
+                    rowStart: 0,
+                    rowEnd: 1,
+                    columnStart: 0,
+                    columnEnd: 1,
+                  },
+                  tablet: {
+                    rowStart: 0,
+                    rowEnd: 1,
+                    columnStart: 0,
+                    columnEnd: 1,
+                  },
+                });
+                setImages(images);
+                pickedImages.push(cubes[0].name || "Error");
+                setPickedImages(pickedImages);
+                setImagesKey(uuid());
+              }}
+            />
+            <IconButton
+              style={{ margin: "5px", border: "1px solid #e5e5ea" }}
+              icon={<Icon icon="minus" />}
+              size="md"
+              onClick={() => {
+                images.pop();
+                setImages(images);
+                pickedImages.pop();
+                setPickedImages(pickedImages);
+                setImagesKey(uuid());
+              }}
+            />
+          </div>
         </>
       )}
     </>
