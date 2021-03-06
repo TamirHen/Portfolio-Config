@@ -2,11 +2,11 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import uuid from "react-uuid";
 
-import Home from "../pages/Home";
-import Project from "../pages/Project";
-import Grid from "./Grid";
+import Home from "../../pages/Home";
+import Project from "../../pages/Project";
+import Grid from "../grid/Grid";
 import TextBody from "./TextBody";
-import GridScheme from "../components/GridScheme";
+import GridScheme from "../grid/GridScheme";
 
 const Body = (props) => {
   const { data } = props;

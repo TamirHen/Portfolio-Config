@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react";
 import { Button } from "rsuite";
-import { updateDB } from "../utils/Firebase";
+import { updateDB } from "../../utils/Firebase";
 import uuid from "react-uuid";
-import { DataContext } from "../providers/DataProvider";
+import { DataContext } from "../../providers/DataProvider";
 
 import "./Popup.css";
-import CubePopup from "./Popups/CubePopup";
-import HeaderTextPopup from "./Popups/HeaderTextPopup";
-import HeaderLinksPopup from "./Popups/HeaderLinksPopup";
-import HomepagePopup from "./Popups/HomepagePopup";
+import CubePopup from "./CubePopup";
+import HeaderTextPopup from "./HeaderTextPopup";
+import HeaderLinksPopup from "./HeaderLinksPopup";
+import HomepagePopup from "./HomepagePopup";
 
 const Popup = (props) => {
   const data = useContext(DataContext);

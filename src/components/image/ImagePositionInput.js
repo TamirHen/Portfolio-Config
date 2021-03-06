@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Input } from "rsuite";
-import { DataContext } from "../providers/DataProvider";
+import { DataContext } from "../../providers/DataProvider";
 
 const ImagePositionInput = (props) => {
   const data = useContext(DataContext);

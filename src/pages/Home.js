@@ -1,6 +1,6 @@
 import React from "react";
-import Grid from "../components/Grid";
-import GridScheme from "../components/GridScheme";
+import Grid from "../components/grid/Grid";
+import GridScheme from "../components/grid/GridScheme";
 
 const Home = (props) => {
   return (

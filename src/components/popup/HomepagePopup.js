@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import uuid from "react-uuid";
 import { Input, Dropdown, Divider, IconButton, Icon } from "rsuite";
 import { DataContext } from "../../providers/DataProvider";
-import ImagePositionInput from "../ImagePositionInput";
+import ImagePositionInput from "../image/ImagePositionInput";
 
 const HomepagePopup = (props) => {
   const data = useContext(DataContext);

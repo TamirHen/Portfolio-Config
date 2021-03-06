@@ -1,9 +1,9 @@
 /* eslint-disable eqeqeq */
 import React from "react";
-import Grid from "../components/Grid";
-import TextBody from "../components/TextBody";
+import Grid from "../components/grid/Grid";
+import TextBody from "../components/body/TextBody";
 import { useParams } from "react-router-dom";
-import GridScheme from "../components/GridScheme";
+import GridScheme from "../components/grid/GridScheme";
 
 const Project = (props) => {
   const { cubeId } = useParams();

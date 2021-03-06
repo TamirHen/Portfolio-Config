@@ -3,7 +3,7 @@ import React from "react";
 import { useMediaQuery } from "react-responsive";
 import uuid from "react-uuid";
 
-import Image from "./Image";
+import Image from "../image/Image";
 
 const Grid = (props) => {
   const { data, page, cubeId, hlink } = props;

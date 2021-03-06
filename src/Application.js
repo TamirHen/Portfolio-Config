@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-import Header from "./components/Header";
-import Body from "./components/Body";
-import Footer from "./components/Footer";
+import Header from "./components/menu/Header";
+import Body from "./components/body/Body";
+import Footer from "./components/menu/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { DataContext } from "./providers/DataProvider";
-import ConfigNavBar from "./components/ConfigNovBar";
-import Popup from "./components/Popup";
+import ConfigNavBar from "./components/menu/ConfigNavBar";
+import Popup from "./components/popup/Popup";
 import uuid from "react-uuid";
 
 function App() {

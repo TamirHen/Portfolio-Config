@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import uuid from "react-uuid";
 import { Sidenav, Nav, Dropdown, IconButton, Icon } from "rsuite";
 import "rsuite/dist/styles/rsuite-default.css";
-import { DataContext } from "../providers/DataProvider";
-import { updateDB } from "../utils/Firebase";
+import { DataContext } from "../../providers/DataProvider";
+import { updateDB } from "../../utils/Firebase";
 
-import "./ConfigNovBar.css";
+import "./ConfigNavBar.css";
 
 const ConfigNavBar = (props) => {
   const data = useContext(DataContext);
