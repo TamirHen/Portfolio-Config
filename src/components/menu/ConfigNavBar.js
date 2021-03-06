@@ -108,7 +108,7 @@ const ConfigNavBar = (props) => {
                   title="Cubes"
                   icon={<Icon icon="cubes" />}
                 >
-                  {data.cubes.map((cube, index) => (
+                  {data.cubes?.map((cube, index) => (
                     <Dropdown.Item
                       key={uuid()}
                       eventKey={`${counter}-${cube.name}`}

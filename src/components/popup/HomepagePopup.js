@@ -10,7 +10,7 @@ const HomepagePopup = (props) => {
   const cubes = data.cubes;
   const [imagesKey, setImagesKey] = useState(uuid());
   const [pickedImages, setPickedImages] = useState(
-    images.map((image) => {
+    images?.map((image) => {
       return cubes.find((cube) => cube.id === image.cubeId).name;
     })
   );
@@ -81,7 +81,7 @@ const HomepagePopup = (props) => {
         </>
       ) : (
         <>
-          {images.map((image, index) => (
+          {images?.map((image, index) => (
             <div key={imagesKey + index}>
               <div className="popup-field">
                 <Divider style={{ margin: "0px 0px 5px 0px" }} />
@@ -92,7 +92,7 @@ const HomepagePopup = (props) => {
                     name={"cubesDropdown" + index}
                     key={rerenderDropdown}
                   >
-                    {cubes.map((cube) => {
+                    {cubes?.map((cube) => {
                       return (
                         <Dropdown.Item
                           key={uuid()}
